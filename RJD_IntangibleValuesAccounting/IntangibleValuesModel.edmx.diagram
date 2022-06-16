@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7ccba5b17da648ff8e0e8ef243a04253" Name="Diagram1">
+        <EntityTypeShape EntityType="IntangibleAssetsDBModel.AccountingIntangibleValue" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntangibleAssetsDBModel.Bill" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntangibleAssetsDBModel.CounterAgent" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntangibleAssetsDBModel.DepreciationGroup" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntangibleAssetsDBModel.IntangibleValueReceipt" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntangibleAssetsDBModel.MethodDepreciation" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntangibleAssetsDBModel.MethodOfReceipt" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntangibleAssetsDBModel.Role" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntangibleAssetsDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntangibleAssetsDBModel.Type" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntangibleAssetsDBModel.User" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <AssociationConnector Association="IntangibleAssetsDBModel.FK_AccountingIntangibleValue_Bill" ManuallyRouted="false" />
+        <AssociationConnector Association="IntangibleAssetsDBModel.FK_AccountingIntangibleValue_DepreciationMethod" ManuallyRouted="false" />
+        <AssociationConnector Association="IntangibleAssetsDBModel.FK_AccountingIntangibleValue_IntangibleValueReceipt" ManuallyRouted="false" />
+        <AssociationConnector Association="IntangibleAssetsDBModel.FK_AccountingIntangibleValue_User" ManuallyRouted="false" />
+        <AssociationConnector Association="IntangibleAssetsDBModel.FK_IntangibleValue_CounterAgent" ManuallyRouted="false" />
+        <AssociationConnector Association="IntangibleAssetsDBModel.FK_IntangibleValueReceipt_DepreciationGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="IntangibleAssetsDBModel.FK_IntangibleValue_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="IntangibleAssetsDBModel.FK_IntangibleValueReceipt_MethodOfReceipt" ManuallyRouted="false" />
+        <AssociationConnector Association="IntangibleAssetsDBModel.FK_User_Role" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

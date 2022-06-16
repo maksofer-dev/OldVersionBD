@@ -1,0 +1,126 @@
+﻿<Window x:Name="addValueWindow" x:Class="RJD_IntangibleValuesAccounting.View.AddValueWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RJD_IntangibleValuesAccounting.View"
+        mc:Ignorable="d"
+        Title="РЖД" Height="950" Width="650" WindowStartupLocation="CenterScreen"  ResizeMode="NoResize" Background="White" >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
+
+
+            <RowDefinition Height="143*"/>
+
+
+
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="53*"/>
+
+            <ColumnDefinition Width="15*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Полное название: " Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="17" Margin="0,5,0,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold"/>
+        <TextBlock Text="Краткое название: " Grid.Row="3"  HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="17" Margin="0,5,0,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold"/>
+        <TextBox Text="{Binding ValueShortName}" x:Name="valueShortBox" Grid.Row="3" VerticalAlignment="Center" FontSize="15" Height="30" Margin="0,0,0,0" Width="AUTO" Foreground="Black" Cursor="Arrow" Grid.Column="1" TextAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+
+        <Border x:Name="addContractBorder" Grid.Row="0" Grid.ColumnSpan="3"  Background="#FFFA0706" Cursor="Arrow" >
+            <materialDesign:PackIcon Kind="Receipt" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+
+        </Border>
+        <TextBox Text="{Binding ValueFullName}" x:Name="valueFullNameBox" Grid.Row="2" VerticalAlignment="Center" FontSize="15" Height="30" Margin="0,0,0,0" Width="AUTO" Foreground="Black" Cursor="Arrow" Grid.Column="1" />
+
+        <TextBlock Text="Дата получения: " Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="17" Margin="0,0,0,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold"/>
+
+
+
+        <DatePicker SelectedDate="{Binding ValueDateFrom}" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="15" Margin="0,0,0,0" Foreground="Black" Grid.Column="1" />
+        <TextBlock Text="Способ получения : " Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" Margin="0,0,0,5" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" TextWrapping="Wrap" TextAlignment="Right"/>
+        <ComboBox x:Name="receiptMethodCombo" SelectedItem="{Binding MethodOfReceipt}" DisplayMemberPath="MethodName" Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="15" Foreground="Black" Grid.Column="1" Grid.ColumnSpan="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+        <TextBlock Text="Контрагент : " Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" Margin="0,0,0,5" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" TextWrapping="Wrap" TextAlignment="Right"/>
+        <ComboBox x:Name="counterAgentCombo" SelectedItem="{Binding CounterAgent}" DisplayMemberPath="CounterAgentName" Grid.Row="7" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="15" Foreground="Black" Grid.Column="1" Grid.ColumnSpan="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3" Grid.Row="9" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Цена : " Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" Margin="0,0,0,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" TextWrapping="Wrap" TextAlignment="Right"/>
+
+            <TextBox x:Name="costBox" FontSize="15" Text="{Binding ValueCost}" Width="150"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,0,0" Cursor="Arrow" PreviewTextInput="costBox_PreviewTextInput"/>
+            <TextBlock Text="руб." Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Margin="0,0,15,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" TextWrapping="Wrap" TextAlignment="Right"/>
+
+            <TextBlock Text="НДС : " Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" Margin="0,0,0,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" TextWrapping="Wrap" TextAlignment="Right"/>
+
+            <TextBox x:Name="ndsBox" FontSize="15" Text="{Binding ValueNDSPercent}" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Arrow" PreviewTextInput="ndsBox_PreviewTextInput"/>
+            <TextBlock Text="%" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Margin="0,0,0,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" TextWrapping="Wrap" TextAlignment="Right"/>
+
+        </StackPanel>
+        <TextBox x:Name="calcBox" FontSize="15" Text="{Binding ValueCostWithNDS}" Width="250" materialDesign:HintAssist.Hint="Цена с НДС" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,0,0" Grid.Row="10" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="False" Cursor="Arrow"/>
+        <Button x:Name="calcBN" Content="Расчитать" Click="calcBN_Click" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" Cursor="Hand" Grid.Row="10" Background="#FFFA0706" VerticalAlignment="Bottom" Height="32" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Padding="0,0,0,0" Width="100" Grid.ColumnSpan="3"/>
+
+        <Grid Grid.Row="11" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="298"/>
+
+                <ColumnDefinition />
+
+            </Grid.ColumnDefinitions>
+            <Button x:Name="clipImageBN" Content="Прикрепить фото" Click="addImaage_Click" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" Cursor="Hand" Grid.Row="6" Margin="0,5,0,0" Background="#FFFA0706" Grid.Column="1" VerticalAlignment="Top" Height="32" BorderBrush="{x:Null}" Foreground="White"/>
+            <Button x:Name="saveBtn" 
+                Content="Сохранить"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Width="118"
+                Height="42"
+                Background="#FFFA0706"
+                Foreground="White"
+                BorderBrush="{x:Null}"
+                Click="saveBtn_Click"
+                    Grid.Row="6" Cursor="Hand" FontFamily="Proxima Nova Rg" Margin="0,0,0,25" Grid.Column="1">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="cancelBtn" 
+                Content="Отмена"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Width="118"
+                Height="42"
+                Background="#FFFA0706"
+                Foreground="White"
+                BorderBrush="{x:Null}"
+                Click="cancelBtn_Click"
+                    Grid.Row="6" Cursor="Hand" FontFamily="Proxima Nova Rg" Grid.Column="1" Margin="0,0,0,25" >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Image x:Name="valueIMG" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="115" Height="145" Margin="0,0,0,20" Stretch="Fill"/>
+
+        </Grid>
+        <TextBlock Text="Вид НМА : " Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="16" Margin="0,18,0,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" TextWrapping="Wrap" TextAlignment="Right"/>
+        <ComboBox x:Name="typeCombo" SelectedItem="{Binding Type}" DisplayMemberPath="TypeName" Grid.Row="5" FontSize="15" Foreground="Black" Grid.Column="1" Grid.ColumnSpan="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+        <TextBlock Text="Группа амортизации : " Grid.Row="8" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="16" Margin="0,18,0,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" TextWrapping="Wrap" TextAlignment="Right"/>
+        <ComboBox x:Name="depreciationCombo" SelectedItem="{Binding DepreciationGroup}" DisplayMemberPath="GroupName" Grid.Row="8" FontSize="15" Foreground="Black" Grid.Column="1" Grid.ColumnSpan="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+
+    </Grid>
+</Window>

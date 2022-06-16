@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IntangibleAssetsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AccountingIntangibleValue">
+    <Key>
+      <PropertyRef Name="AccountingID" />
+    </Key>
+    <Property Name="AccountingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Value" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DepreciationMethod" Type="Int32" Nullable="false" />
+    <Property Name="DepreciationBill" Type="Int32" Nullable="false" />
+    <Property Name="UsefulLifeOfValue" Type="Int32" Nullable="false" />
+    <Property Name="AccountingResponsible" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bill" Relationship="Self.FK_AccountingIntangibleValue_Bill" FromRole="AccountingIntangibleValue" ToRole="Bill" />
+    <NavigationProperty Name="MethodDepreciation" Relationship="Self.FK_AccountingIntangibleValue_DepreciationMethod" FromRole="AccountingIntangibleValue" ToRole="MethodDepreciation" />
+    <NavigationProperty Name="IntangibleValueReceipt" Relationship="Self.FK_AccountingIntangibleValue_IntangibleValueReceipt" FromRole="AccountingIntangibleValue" ToRole="IntangibleValueReceipt" />
+    <NavigationProperty Name="User" Relationship="Self.FK_AccountingIntangibleValue_User" FromRole="AccountingIntangibleValue" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Bill">
+    <Key>
+      <PropertyRef Name="BillID" />
+    </Key>
+    <Property Name="BillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BillName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BillHolder" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BillNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BillINN" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BillBIK" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AccountingIntangibleValues" Relationship="Self.FK_AccountingIntangibleValue_Bill" FromRole="Bill" ToRole="AccountingIntangibleValue" />
+  </EntityType>
+  <EntityType Name="CounterAgent">
+    <Key>
+      <PropertyRef Name="CounterAgentID" />
+    </Key>
+    <Property Name="CounterAgentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CounterAgentName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CounterAgentHolder" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CounterAgentAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="IntangibleValueReceipts" Relationship="Self.FK_IntangibleValue_CounterAgent" FromRole="CounterAgent" ToRole="IntangibleValueReceipt" />
+  </EntityType>
+  <EntityType Name="DepreciationGroup">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="Int32" Nullable="false" />
+    <Property Name="GroupName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="IntangibleValueReceipts" Relationship="Self.FK_IntangibleValueReceipt_DepreciationGroup" FromRole="DepreciationGroup" ToRole="IntangibleValueReceipt" />
+  </EntityType>
+  <EntityType Name="IntangibleValueReceipt">
+    <Key>
+      <PropertyRef Name="ValueID" />
+    </Key>
+    <Property Name="ValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ValueFullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ValueShortName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ValueCost" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ValueNDSPercent" Type="Byte" Nullable="false" />
+    <Property Name="ValueCostWithNDS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ValueType" Type="Int32" Nullable="false" />
+    <Property Name="ValueCounterAgent" Type="Int32" Nullable="false" />
+    <Property Name="ValueDateFrom" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ValueReceiptMethod" Type="Int32" Nullable="false" />
+    <Property Name="ValueDepreciationGroup" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AccountingIntangibleValues" Relationship="Self.FK_AccountingIntangibleValue_IntangibleValueReceipt" FromRole="IntangibleValueReceipt" ToRole="AccountingIntangibleValue" />
+    <NavigationProperty Name="CounterAgent" Relationship="Self.FK_IntangibleValue_CounterAgent" FromRole="IntangibleValueReceipt" ToRole="CounterAgent" />
+    <NavigationProperty Name="DepreciationGroup" Relationship="Self.FK_IntangibleValueReceipt_DepreciationGroup" FromRole="IntangibleValueReceipt" ToRole="DepreciationGroup" />
+    <NavigationProperty Name="Type" Relationship="Self.FK_IntangibleValue_Type" FromRole="IntangibleValueReceipt" ToRole="Type" />
+    <NavigationProperty Name="MethodOfReceipt" Relationship="Self.FK_IntangibleValueReceipt_MethodOfReceipt" FromRole="IntangibleValueReceipt" ToRole="MethodOfReceipt" />
+  </EntityType>
+  <EntityType Name="MethodDepreciation">
+    <Key>
+      <PropertyRef Name="MethodID" />
+    </Key>
+    <Property Name="MethodID" Type="Int32" Nullable="false" />
+    <Property Name="MethodName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AccountingIntangibleValues" Relationship="Self.FK_AccountingIntangibleValue_DepreciationMethod" FromRole="MethodDepreciation" ToRole="AccountingIntangibleValue" />
+  </EntityType>
+  <EntityType Name="MethodOfReceipt">
+    <Key>
+      <PropertyRef Name="MethodID" />
+    </Key>
+    <Property Name="MethodID" Type="Int32" Nullable="false" />
+    <Property Name="MethodName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="IntangibleValueReceipts" Relationship="Self.FK_IntangibleValueReceipt_MethodOfReceipt" FromRole="MethodOfReceipt" ToRole="IntangibleValueReceipt" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="Int32" Nullable="false" />
+    <Property Name="TypeName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="IntangibleValueReceipts" Relationship="Self.FK_IntangibleValue_Type" FromRole="Type" ToRole="IntangibleValueReceipt" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserPhoto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserRole" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AccountingIntangibleValues" Relationship="Self.FK_AccountingIntangibleValue_User" FromRole="User" ToRole="AccountingIntangibleValue" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+  </EntityType>
+  <Association Name="FK_AccountingIntangibleValue_Bill">
+    <End Role="Bill" Type="Self.Bill" Multiplicity="1" />
+    <End Role="AccountingIntangibleValue" Type="Self.AccountingIntangibleValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bill">
+        <PropertyRef Name="BillID" />
+      </Principal>
+      <Dependent Role="AccountingIntangibleValue">
+        <PropertyRef Name="DepreciationBill" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountingIntangibleValue_DepreciationMethod">
+    <End Role="MethodDepreciation" Type="Self.MethodDepreciation" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AccountingIntangibleValue" Type="Self.AccountingIntangibleValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MethodDepreciation">
+        <PropertyRef Name="MethodID" />
+      </Principal>
+      <Dependent Role="AccountingIntangibleValue">
+        <PropertyRef Name="DepreciationMethod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountingIntangibleValue_IntangibleValueReceipt">
+    <End Role="IntangibleValueReceipt" Type="Self.IntangibleValueReceipt" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AccountingIntangibleValue" Type="Self.AccountingIntangibleValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IntangibleValueReceipt">
+        <PropertyRef Name="ValueID" />
+      </Principal>
+      <Dependent Role="AccountingIntangibleValue">
+        <PropertyRef Name="Value" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountingIntangibleValue_User">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AccountingIntangibleValue" Type="Self.AccountingIntangibleValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="AccountingIntangibleValue">
+        <PropertyRef Name="AccountingResponsible" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntangibleValue_CounterAgent">
+    <End Role="CounterAgent" Type="Self.CounterAgent" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="IntangibleValueReceipt" Type="Self.IntangibleValueReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CounterAgent">
+        <PropertyRef Name="CounterAgentID" />
+      </Principal>
+      <Dependent Role="IntangibleValueReceipt">
+        <PropertyRef Name="ValueCounterAgent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntangibleValueReceipt_DepreciationGroup">
+    <End Role="DepreciationGroup" Type="Self.DepreciationGroup" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="IntangibleValueReceipt" Type="Self.IntangibleValueReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DepreciationGroup">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="IntangibleValueReceipt">
+        <PropertyRef Name="ValueDepreciationGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntangibleValue_Type">
+    <End Role="Type" Type="Self.Type" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="IntangibleValueReceipt" Type="Self.IntangibleValueReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="IntangibleValueReceipt">
+        <PropertyRef Name="ValueType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntangibleValueReceipt_MethodOfReceipt">
+    <End Role="MethodOfReceipt" Type="Self.MethodOfReceipt" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="IntangibleValueReceipt" Type="Self.IntangibleValueReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MethodOfReceipt">
+        <PropertyRef Name="MethodID" />
+      </Principal>
+      <Dependent Role="IntangibleValueReceipt">
+        <PropertyRef Name="ValueReceiptMethod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IntangibleAssetsDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AccountingIntangibleValues" EntityType="Self.AccountingIntangibleValue" />
+    <EntitySet Name="Bills" EntityType="Self.Bill" />
+    <EntitySet Name="CounterAgents" EntityType="Self.CounterAgent" />
+    <EntitySet Name="DepreciationGroups" EntityType="Self.DepreciationGroup" />
+    <EntitySet Name="IntangibleValueReceipts" EntityType="Self.IntangibleValueReceipt" />
+    <EntitySet Name="MethodDepreciations" EntityType="Self.MethodDepreciation" />
+    <EntitySet Name="MethodOfReceipts" EntityType="Self.MethodOfReceipt" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Types" EntityType="Self.Type" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_AccountingIntangibleValue_Bill" Association="Self.FK_AccountingIntangibleValue_Bill">
+      <End Role="Bill" EntitySet="Bills" />
+      <End Role="AccountingIntangibleValue" EntitySet="AccountingIntangibleValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountingIntangibleValue_DepreciationMethod" Association="Self.FK_AccountingIntangibleValue_DepreciationMethod">
+      <End Role="MethodDepreciation" EntitySet="MethodDepreciations" />
+      <End Role="AccountingIntangibleValue" EntitySet="AccountingIntangibleValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountingIntangibleValue_IntangibleValueReceipt" Association="Self.FK_AccountingIntangibleValue_IntangibleValueReceipt">
+      <End Role="IntangibleValueReceipt" EntitySet="IntangibleValueReceipts" />
+      <End Role="AccountingIntangibleValue" EntitySet="AccountingIntangibleValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountingIntangibleValue_User" Association="Self.FK_AccountingIntangibleValue_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="AccountingIntangibleValue" EntitySet="AccountingIntangibleValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntangibleValue_CounterAgent" Association="Self.FK_IntangibleValue_CounterAgent">
+      <End Role="CounterAgent" EntitySet="CounterAgents" />
+      <End Role="IntangibleValueReceipt" EntitySet="IntangibleValueReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntangibleValueReceipt_DepreciationGroup" Association="Self.FK_IntangibleValueReceipt_DepreciationGroup">
+      <End Role="DepreciationGroup" EntitySet="DepreciationGroups" />
+      <End Role="IntangibleValueReceipt" EntitySet="IntangibleValueReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntangibleValue_Type" Association="Self.FK_IntangibleValue_Type">
+      <End Role="Type" EntitySet="Types" />
+      <End Role="IntangibleValueReceipt" EntitySet="IntangibleValueReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntangibleValueReceipt_MethodOfReceipt" Association="Self.FK_IntangibleValueReceipt_MethodOfReceipt">
+      <End Role="MethodOfReceipt" EntitySet="MethodOfReceipts" />
+      <End Role="IntangibleValueReceipt" EntitySet="IntangibleValueReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

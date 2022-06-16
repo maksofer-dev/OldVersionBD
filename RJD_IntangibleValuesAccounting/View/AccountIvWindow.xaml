@@ -1,0 +1,91 @@
+﻿<Window x:Name="accountIvWindow" x:Class="RJD_IntangibleValuesAccounting.View.AccountIvWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:RJD_IntangibleValuesAccounting.View"
+        mc:Ignorable="d"
+        Title="AddActorWindow" Height="520" Width="550" WindowStartupLocation="CenterScreen" Background="White" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+
+            <RowDefinition Height="90"/>
+
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="53*"/>
+
+            <ColumnDefinition Width="15*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Ценность: " Grid.Row="3"  HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="17" Margin="0,5,0,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold"/>
+
+        <Border x:Name="addActorBorder" Grid.Row="0" Grid.ColumnSpan="3" MouseLeftButtonDown="addActorBorder_MouseLeftButtonDown_1" Background="#FFFA0706">
+            <materialDesign:PackIcon Kind="Person" Width="60" Height="60" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center"/>
+
+
+        </Border>
+        <ComboBox SelectedItem="{Binding IntangibleValueReceipt}" DisplayMemberPath="ValueFullName" x:Name="valueCombo" Grid.Row="3" VerticalAlignment="Center" FontSize="15" Height="30" Margin="0,0,0,0" Width="AUTO" Foreground="Black" Cursor="Hand" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+        <TextBlock Text="Способ начисления амортизации:" Grid.Row="4" TextWrapping="Wrap" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="17" Margin="0,0,5,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" TextAlignment="Right"/>
+
+        <TextBlock Text="Дата: " Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="17" Margin="0,0,0,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold"/>
+        <ComboBox x:Name="methodCombo" SelectedItem="{Binding MethodDepreciation}" DisplayMemberPath="MethodName" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="15" Margin="0,0,0,0" Foreground="Black" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+
+
+
+        <DatePicker SelectedDate="{Binding Date}" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="15" Margin="0,0,0,0" Foreground="Black" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <TextBlock Text="Счет амортизации : " Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" Margin="0,0,0,5" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" TextWrapping="Wrap" TextAlignment="Right"/>
+        <ComboBox x:Name="billCombo" SelectedItem="{Binding Bill}" DisplayMemberPath="BillName" Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="15" Foreground="Black" Grid.Column="1" Grid.ColumnSpan="1" Cursor="Arrow" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,1">
+            <Button x:Name="saveBtn" 
+                Content="Сохранить"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Width="118"
+                Height="42"
+                Background="#FFFA0706"
+                Foreground="White"
+                BorderBrush="{x:Null}"
+                Click="saveBtn_Click"
+                    Grid.Row="6" Cursor="Hand" FontFamily="Proxima Nova Rg" Margin="0,0,25,0" Grid.Column="1" Padding="0,0,0,0">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="cancelBtn" 
+                Content="Отмена"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Width="118"
+                Height="42"
+                Background="#FFFA0706"
+                Foreground="White"
+                BorderBrush="{x:Null}"
+                Click="cancelBtn_Click"
+                    Grid.Row="6" Cursor="Hand" FontFamily="Proxima Nova Rg" Grid.Column="1" Margin="0,0,0,0" >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+        <TextBlock Text="Срок полезного использования:" TextWrapping="Wrap" Grid.Row="6"  HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="17" Margin="0,0,5,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" TextAlignment="Right"/>
+        <TextBox Text="{Binding UsefulLifeOfValue}" x:Name="usefullLifeBox" Grid.Row="6" VerticalAlignment="Center" FontSize="15" Height="30" Width="AUTO" Foreground="Black" Cursor="Arrow" Grid.Column="1" TextAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" PreviewTextInput="usefullLifeBox_PreviewTextInput" />
+        <TextBlock Text="мес." TextWrapping="Wrap" Grid.Row="6"  HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="17" Grid.Column="3" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" TextAlignment="Right"/>
+
+    </Grid>
+</Window>

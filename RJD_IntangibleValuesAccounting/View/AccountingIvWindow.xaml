@@ -1,0 +1,215 @@
+﻿<Window x:Name="accountingIvWindow" x:Class="RJD_IntangibleValuesAccounting.View.AccountingIvWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RJD_IntangibleValuesAccounting.View"
+        mc:Ignorable="d"
+        Title="РЖД - Принятие к учету НМА" MinHeight="700" 
+        MinWidth="950"
+        SizeToContent="WidthAndHeight"
+        MaxHeight="800"
+        MaxWidth="1080"
+        Background="White"
+        WindowStartupLocation="CenterScreen" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
+
+            <RowDefinition/>
+
+        </Grid.RowDefinitions>
+        <Border x:Name="actorsBorder" Background="#FFFA0706" Grid.ColumnSpan="2" MouseLeftButtonDown="actorsBorder_MouseLeftButtonDown" Cursor="Hand">
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <materialDesign:PackIcon Kind="ReceiptTextPlusOutline" 
+                                             Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,19.7,0" Foreground="White"/>
+                <TextBlock Text="Принятие к учету НМА" FontSize="35"
+                               FontFamily="/RJD_IntangibleValuesAccounting;component/Fonts/#RussianRail G Pro"
+                               Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+
+        <Button x:Name="backBN" FontFamily="/RJD_IntangibleValuesAccounting;component/Fonts/#IBM Plex Sans" Width="100" Height="42" Grid.Row="1" Foreground="White" Background="#FFFA0706" Content="Назад" HorizontalAlignment="Left" Margin="30,0,0,0" Click="backBN_Click" Cursor="Hand" Padding="0,0,0,0"/>
+        <Button x:Name="screenBN" ToolTip="Сделать скриншот текущего положения таблицы" FontFamily="/RJD_IntangibleValuesAccounting;component/Fonts/#IBM Plex Sans" Width="40" Height="40" Grid.Row="1" Foreground="White" Background="#FFFA0706" HorizontalAlignment="Right" Margin="0,0,30,0" Click="screenBN_Click" Cursor="Hand" Padding="0,0,0,0">
+            <materialDesign:PackIcon Kind="MonitorScreenshot" Width="40" Height="40" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </Button>
+
+        <StackPanel x:Name="buttsPanel" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+            <Button x:Name="addBtn" 
+                Content="Принять"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Width="118"
+                Height="42"
+                Background="#FFFA0706"
+                Foreground="White"
+                Click="addBtn_Click"
+                    Grid.Row="0" Cursor="Hand" FontFamily="Proxima Nova Rg" BorderBrush="{x:Null}">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="delBtn" 
+                Content="Снять"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Width="118"
+                Height="42"
+                Background="#FFFA0706"
+                Foreground="White"
+                BorderBrush="{x:Null}"
+                Click="delBtn_Click"
+                    Grid.Row="0" Cursor="Hand" FontFamily="Proxima Nova Rg" Margin="50,0,0,0">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="refreshBtn" 
+                Content="Обновить"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Width="118"
+                Height="42"
+                Background="#FFFA0706"
+                Foreground="White"
+                BorderBrush="{x:Null}" 
+                Click="refreshBtn_Click"
+                    Grid.Row="0" Cursor="Hand" FontFamily="Proxima Nova Rg" Margin="50,0,0,0">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+        </StackPanel>
+        <DataGrid x:Name="dGridIvAccountingList" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" Foreground="#FFFA0706">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn  Header="Ценность" Binding="{Binding IntangibleValueReceipt.ValueFullName}" Width="150">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn  Header="Дата учета" Binding="{Binding Date, StringFormat=dd-MM-yyyy}" Width="100">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn  Header="Способ начисления амортизации" Width="210" Binding="{Binding MethodDepreciation.MethodName}">
+
+                    <DataGridTextColumn.HeaderStyle>
+
+                        <Style TargetType="DataGridColumnHeader">
+
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Счет амортизации" Binding="{Binding Bill.BillName}" Width="120">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Полезное использование" Binding="{Binding UsefulLifeOfValue, StringFormat={}{0} мес.}" Width="165">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Ответственный" Binding="{Binding User.FullName}" Width="150">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn x:Name="editCell" >
+                    <DataGridTemplateColumn.CellTemplate>
+
+                        <DataTemplate>
+                            <Button  Content="Редактировать" x:Name="btnEdit" Click="btnEdit_Click" Width="130" HorizontalAlignment="Center" Cursor="Hand" Background="#FFFA0706" Foreground="White"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
